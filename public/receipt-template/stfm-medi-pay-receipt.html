@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="%BASE_URL%/lib/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+  <script src="%BASE_URL%/lib/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+  <script src="%BASE_URL%/lib/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+  <script src="%BASE_URL%/lib/bwip-js-4.5.1/bwip-js.js"></script>
+  <script>window.bwipjs = window.module && window.module.exports ? window.module.exports : bwipjs;</script>
+  <script src="%BASE_URL%/lib/custom/common.js"></script>
+  <title>STFM 의료 결제 전표</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      /* max-width: 260px; */
+      /* BIXOLON SRP 350III*/
+      max-width: 69mm;
+      /* SEWOO SLK-TS200 */
+      /* max-width: 72mm; */
+      font-family: 'D2Coding', serif;
+      font-size: 0.9rem;
+      line-height: 0.9rem;
+      letter-spacing: -0.05rem;
+    }
+
+    hr {
+      border-style: dashed;
+      border-width: 0.1rem;
+      opacity: 1;
+    }
+
+    @media print {
+      @page {
+        margin: 0;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container-fluid p-0 m-0">
+    <div class="text-center">[영수증]</div>
+
+    <hr class="my-1"/>
+
+    <div>
+      <div class="d-flex justify-content-between">
+        <span>결제 유형</span>
+        <span>{{payType}}</span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>결제승인번호</span>
+        <span>{{tradeNo}}</span>
+      </div>
+    </div>
+
+    <hr class="my-1"/>
+
+    <div>
+      <div class="fw-bold">판매자 RETAILER</div>
+      <div>{{shopName}}</div>
+      <div class="d-flex justify-content-between">
+        <span>대표자 {{ceoName}}</span>
+        <span id="bizPermitNo"></span>
+      </div>
+      <div>{{shopAddr}}</div>
+      <div>연락처 Tel.{{shopTelNo}}</div>
+    </div>
+
+    <hr class="my-1"/>
+
+    <div class="d-flex justify-content-between">
+      <span>Date Of Sale</span>
+      <span id="salesDtm"></span>
+    </div>
+
+    <hr class="my-1"/>
+
+    <div class="d-flex justify-content-between">
+      <span>총액 Sales Amount</span>
+      <span id="totalSalesAmt"></span>
+    </div>
+
+    <hr class="my-1"/>
+
+    <br/>
+
+    <div>{{purpose}}</div>
+
+    <div class="my-3">
+      <canvas id="barcode" class="d-block m-auto" style="width: 55%"></canvas>
+      <div id="barcodeHri" class="w-100 d-flex justify-content-between"></div>
+    </div>
+
+    <!-- 데이터 동적 삽입 -->
+    <script>
+      const formattedBizPermitNo = formatBizPermitNo('{{bizPermitNo}}');
+      const formattedSalesDtm = formatDateTime('{{sellDate}}{{sellTime}}');
+      const formattedTotalSalesAmt = formatNumber('{{totalSalesAmt}}');
+
+      document.getElementById('bizPermitNo').innerText = formattedBizPermitNo;
+      document.getElementById('salesDtm').innerText = formattedSalesDtm;
+      document.getElementById('totalSalesAmt').innerText = formattedTotalSalesAmt;
+
+    </script>
+
+    <!-- 바코드 -->
+    <script>
+
+      const tradeNo = '{{tradeNo}}';
+
+      try {
+        bwipjs.toCanvas('barcode', {
+          bcid: 'code128',
+          text: tradeNo,
+          scale: 2,
+          height: 15,
+          includetext: false,
+          textxalign: 'justify',
+        })
+      } catch (e) {
+        console.error(e);
+      }
+
+      const barcodeHri = document.getElementById('barcodeHri');
+      barcodeHri.innerHTML = tradeNo.split('').map(v => `<span>${v}</span>`).join('');
+    </script>
+
+  </div>
+</body>
+</html>

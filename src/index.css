@@ -1,7 +1,12 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-    Arial, sans-serif;
-  margin: auto;
-  max-width: 38rem;
-  padding: 2rem;
+* {
+  user-select: none;
+}
+
+.dropdown-item-dark:active {
+  background-color: rgba(var(--bs-black-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.form-check-input-dark:checked {
+  background-color: rgba(var(--bs-black-rgb), var(--bs-bg-opacity)) !important;
+  border-color: rgba(var(--bs-black-rgb), var(--bs-bg-opacity)) !important;
 }

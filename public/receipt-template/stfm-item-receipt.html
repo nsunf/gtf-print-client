@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="%BASE_URL%/lib/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+  <script src="%BASE_URL%/lib/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+  <script src="%BASE_URL%/lib/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+  <script src="%BASE_URL%/lib/bwip-js-4.5.1/bwip-js.js"></script>
+  <script>window.bwipjs = window.module && window.module.exports ? window.module.exports : bwipjs;</script>
+  <script src="%BASE_URL%/lib/custom/common.js"></script>
+  <title>STFM 물품 전표</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      /* max-width: 260px; */
+      /* BIXOLON SRP 350III*/
+      max-width: 69mm;
+      /* SEWOO SLK-TS200 */
+      /* max-width: 72mm; */
+      font-family: 'D2Coding', serif;
+      font-size: 0.9rem;
+      line-height: 0.9rem;
+      letter-spacing: -0.05rem;
+    }
+
+    hr {
+      border-style: dashed;
+      border-width: 0.1rem;
+      opacity: 1;
+    }
+
+    @media print {
+      @page {
+        margin: 0;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container-fluid p-0 m-0">
+    <div class="text-center">
+      <div>GLOBAL TAXFREE</div>
+      <div>This document is authorized by Korea NTS</div>
+      <div>국세청장이 인정한 것임</div>
+    </div>
+
+    <hr class="mt-2 mb-0"/>
+
+    <div class="d-flex justify-content-around align-items-center">
+      <img src="%BASE_URL%/img/logo.jpg" style="width: 130px;"/>
+      <canvas id="qrcode" class="me-4" style="width: 30%;"></canvas>
+    </div>
+
+    <div>
+      <div class="d-flex justify-content-between">
+        <span>구매일련번호</span>
+        <span id="buySerialNo"></span>
+      </div>
+    </div>
+
+    <hr class="my-1"/>
+
+    <div>
+      <div class="fw-bold">판매자 RETAILER</div>
+      <div>{{shopName}}</div>
+      <div class="d-flex justify-content-between">
+        <span>{{ceoName}}</span>
+        <span id="bizPermitNo"></span>
+      </div>
+      <div>{{shopAddr}}</div>
+      <div>연락처 Tel <span>{{shopTelNo}}</span></div>
+    </div>
+
+    <hr class="my-1"/>
+
+    <div>
+      <div class="d-flex justify-content-between">
+        <span>Date Of Sale</span>
+        <span id="salesDtm"></span>
+      </div>
+      <div class="d-flex justify-content-between"><span>Card NO</span><span></span></div>
+    </div>
+
+    <hr class="my-1"/>
+
+    <div>
+      <div class="fw-bold">물품 구매내역 Description of Goods</div>
+      <div id="goodsList">
+        <!-- <div class="d-flex">
+          <span class="w-50">테스트 물품1</span>
+          <span class="w-25">1</span>
+          <span class="w-25 text-end">30,000</span>
+        </div> -->
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>총액 Sales amount</span>
+        <span id="totalSalesAmt"></span>
+      </div>
+    </div>
+
+    <hr class="my-1"/>
+
+    <div>
+      <div class="d-flex justify-content-between">
+        <span>부가세 V.A.T</span>
+        <span id="totalVATAmt"></span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>개소세 S.C.T</span>
+        <span id="totalSCTAmt"></span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>교육세 E.T</span>
+        <span id="totalETAmt"></span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>합계 Tax total</span>
+        <span id="totalTaxAmt"></span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>제비용 Administrative charge</span>
+        <span id="totalChargeAmt"></span>
+      </div>
+      <div class="d-flex justify-content-between fw-bold">
+        <span>환급액 Refund Value</span>
+        <span id="totalRefundAmt"></span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>반출유효기간 Export expiry date</span>
+        <span id="exportExpiryDate"></span>
+      </div>
+    </div>
+
+    <hr class="my-1"/>
+
+    <div>
+      <div class="fw-bold">구매자 CUSTOMER</div>
+      <div>Passport Full Name</div>
+      <div>{{passportName}}</div>
+      <div class="d-flex justify-content-between">
+        <span>Passport No.</span>
+        <span>{{passportNo}}</span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>Nationality</span>
+        <span>{{passportNationalityCode}}</span>
+      </div>
+    </div>
+
+    <hr class="my-1"/>
+
+    <div>
+      <div>환급수단/Refund Option</div>
+      <div>[ ] Alipay(Alipay Mobile phone number 11 digits)</div>
+      <br/>
+      <br/>
+      <div>[ ] Credit Card(Visa/Master/JCB/CUP) Card No.</div>
+      <br/>
+      <br/>
+      <div>Expiry date (MM/YY)</div>
+      <div>Address</div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <div>E-mail</div>
+      <br/>
+      <br/>
+    </div>
+
+    <hr class="my-1"/>
+
+    <div>
+      <div class="d-flex">
+        <span class="w-50">Sign</span>
+        <span class="w-50">세관반출날인</span>
+      </div>
+      <br/>
+      <br/>
+      <div>I agree to voluntarily provide personal INFO.</div>
+      <br/>
+      <div>{{purpose}}</div>
+    </div>
+
+    <div class="my-3">
+      <canvas id="barcode" class="d-block m-auto" style="width: 55%"></canvas>
+      <div id="barcodeHri" class="w-100 d-flex justify-content-between"></div>
+    </div>
+
+    <!-- 데이터 동적 삽입 -->
+    <script>
+      const formattedBuySerialNo = formatBuySerialNo('{{buySerialNo}}');
+      const formattedBizPermitNo = formatBizPermitNo('{{bizPermitNo}}');
+      const formattedSalesDtm = formatDateTime('{{sellDate}}{{sellTime}}');
+      const formattedTotalSalesAmt = formatNumber('{{totalSalesAmt}}');
+      const formattedTotalVATAmt = formatNumber('{{totalVATAmt}}');
+      const formattedTotalSCTAmt = formatNumber('{{totalSCTAmt}}');
+      const formattedTotalETAmt = formatNumber('{{totalETAmt}}');
+      const formattedTotalTaxAmt = formatNumber('{{totalTaxAmt}}');
+      const formattedTotalChargeAmt = formatNumber('{{totalChargeAmt}}');
+      const formattedTotalRefundAmt = formatNumber('{{totalRefundAmt}}');
+      const formattedExportExpiryDate = formatDate('{{exportExpiryDate}}');
+
+
+      document.getElementById('buySerialNo').innerText = formattedBuySerialNo;
+      document.getElementById('bizPermitNo').innerText = formattedBizPermitNo;
+      document.getElementById('salesDtm').innerText = formattedSalesDtm;
+      document.getElementById('totalSalesAmt').innerText = formattedTotalSalesAmt;
+      document.getElementById('totalVATAmt').innerText = formattedTotalVATAmt;
+      document.getElementById('totalSCTAmt').innerText = formattedTotalSCTAmt;
+      document.getElementById('totalETAmt').innerText = formattedTotalETAmt;
+      document.getElementById('totalTaxAmt').innerText = formattedTotalTaxAmt;
+      document.getElementById('totalChargeAmt').innerText = formattedTotalChargeAmt;
+      document.getElementById('totalRefundAmt').innerText = formattedTotalRefundAmt;
+      document.getElementById('exportExpiryDate').innerText = formattedExportExpiryDate;
+
+      console.log('{{goodsList}}');
+      const goodsList = JSON.parse('{{goodsList}}');
+
+      document.getElementById('goodsList').innerHTML = '';
+      goodsList.forEach(goods => {
+        const wrap = document.createElement('div');
+        const goodsName = document.createElement('span');
+        const qty = document.createElement('span');
+        const sellAmt = document.createElement('span');
+
+        wrap.classList.add('d-flex');
+        goodsName.classList.add('w-50');
+        qty.classList.add('w-25');
+        sellAmt.classList.add('w-25');
+        sellAmt.classList.add('text-end');
+
+        goodsName.innerText = goods.goodsName;
+        qty.innerText = formatNumber(goods.qty);
+        sellAmt.innerText = formatNumber(goods.sellAmt);
+
+        wrap.appendChild(goodsName);
+        wrap.appendChild(qty);
+        wrap.appendChild(sellAmt);
+
+        document.getElementById('goodsList').appendChild(wrap);
+      });
+
+    </script>
+
+    <!-- 바코드 -->
+    <script>
+
+      const buySerialNo = '{{buySerialNo}}'.padEnd(20, ' ');
+      const passportName = '{{passportName}}'.padEnd(40, ' ');
+      const passportNo = '{{passportNo}}'.padEnd(9, ' ');
+      const nationalityCode = '{{passportNationalityCode}}'.padEnd(3, ' ');
+      const genderCode = '{{passportGenderCode}}'.padEnd(1, ' ');
+      const birthday = '{{passportBirthday}}'.padEnd(6, ' ');
+      const expiryDate = '{{passportExpiryDate}}'.padEnd(6, ' ');
+      const passportEtcData = ''.padEnd(16, ' ');
+
+      try {
+        bwipjs.toCanvas('qrcode', {
+          bcid: 'qrcode',
+          text: buySerialNo + passportName + passportNo + nationalityCode + genderCode + birthday + expiryDate + passportEtcData,
+          scale: 2,
+          // height: 9,
+          includetext: true,
+          textxalign: 'justify',
+        })
+
+        bwipjs.toCanvas('barcode', {
+          bcid: 'code128',
+          text: buySerialNo,
+          scale: 2,
+          height: 15,
+          includetext: false,
+          textxalign: 'justify',
+        })
+      } catch (e) {
+        console.error(e);
+      }
+
+      const barcodeHri = document.getElementById('barcodeHri');
+      barcodeHri.innerHTML = buySerialNo.split('').map(v => `<span>${v}</span>`).join('');
+    </script>
+
+  </div>
+</body>
+</html>

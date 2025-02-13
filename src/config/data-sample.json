@@ -1,0 +1,141 @@
+{
+    "STFM_ITEM": {
+        "type": "STFM_ITEM",
+        "printerName": "",
+        "buySerialNo": "20021581604250000004",
+        "shopTmlId": "02158",
+        "shopName": "현대백화점 천호",
+        "ceoName": "김***외",
+        "bizPermitNo": "2128519282",
+        "shopAddr": "**** **** (******",
+        "shopTelNo": "024*******2233",
+        "sellDate": "20250120",
+        "sellTime": "093847",
+        "cardNo": "",
+        "totalSalesAmt": 50000,
+        "totalVATAmt": 4549,
+        "totalSCTAmt": 0,
+        "totalETAmt": 0,
+        "totalTaxAmt": 4549,
+        "totalChargeAmt": 1549,
+        "totalRefundAmt": 3000,
+        "passportName": "TESTPASS",
+        "passportNo": "E22222229",
+        "passportNationalityCode": "CHN",
+        "passportGenderCode": "F",
+        "passportBirthday": "921230",
+        "passportExpiryDate": "301230",
+        "signData": "",
+        "exportExpiryDate": "20250420",
+        "purpose": "고객용",
+        "goodsList": [
+            {
+                "goodsName": "테스트 물품1",
+                "qty": 1,
+                "sellAmt": 50000
+            }
+        ]
+    },
+    "STFM_ITEM_OFFLINE": {
+        "type": "STFM_ITEM_OFFLINE",
+        "printerName": "",
+        "buySerialNo": "20922534250211144922",
+        "shopTmlId": "22534",
+        "shopName": "현대백화점 천호",
+        "ceoName": "김***외",
+        "bizPermitNo": "2128519282",
+        "shopAddr": "**** **** (******",
+        "shopTelNo": "024*******2233",
+        "sellDate": "20250211",
+        "sellTime": "144922",
+        "cardNo": "",
+        "totalSalesAmt": 50000,
+        "totalVATAmt": 4545,
+        "totalSCTAmt": 0,
+        "totalETAmt": 0,
+        "totalTaxAmt": 4545,
+        "totalChargeAmt": 1545,
+        "totalRefundAmt": 3000,
+        "passportName": "GTFTEST",
+        "passportNo": "KM1649464",
+        "passportNationalityCode": "CHN",
+        "passportGenderCode": "F",
+        "passportBirthday": "000222",
+        "passportExpiryDate": "250930",
+        "signData": "",
+        "exportExpiryDate": "20250511",
+        "purpose": "고객용",
+        "goodsList": [
+            {
+                "goodsName": "잡화",
+                "qty": 1,
+                "sellAmt": 50000,
+                "itemsCode": "14"
+            }
+        ]
+    },
+    "STFM_MEDI_REFUND": {
+        "type": "STFM_MEDI_REFUND",
+        "buySerialNo": "20628733255040000016",
+        "shopTmlId": "28733",
+        "shopName": "PG연동 테스트 매장",
+        "ceoName": "김***호",
+        "bizPermitNo": "1048198557",
+        "mediFullCode": "M-2021-01-08-6146",
+        "shopAddr": "****13****로2가******",
+        "shopTelNo": "070*******7237",
+        "facilitatorName": "엠케이통상 주식회사",
+        "facilitatorFullCode": "A-2017-05-01-2930",
+        "facilitatorBizNo": "4108133920",
+        "sellDate": "20250213",
+        "sellTime": "105039",
+        "cardNo": "",
+        "totalSalesAmt": 90000,
+        "totalVATAmt": 8181,
+        "totalChargeAmt": 3181,
+        "totalRefundAmt": 5000,
+        "cashPayAmt": 0,
+        "cardPayAmt": 90000,
+        "passportName": "GTFTEST",
+        "passportNo": "KM1644964",
+        "passportNationalityCode": "CHN",
+        "passportGenderCode": "M",
+        "passportBirthday": "000222",
+        "passportExpiryDate": "250930",
+        "signData": "",
+        "exportExpiryDate": "20250513",
+        "purpose": "고객용",
+        "goodsList": [
+            {
+                "goodsName": "Double Eye-lid",
+                "sellAmt": 50000,
+                "vatAmt": 4545
+            },
+            {
+                "goodsName": "Rhinoplasty",
+                "sellAmt": 40000,
+                "vatAmt": 3636
+            }
+        ]
+    },
+    "STFM_MEDI_PAY": {
+        "type": "STFM_MEDI_PAY",
+        "tradeNo": "250121100005477",
+        "payType": "ALI_PAY",
+        "shopName": "PG연동 테스트 매장",
+        "ceoName": "김***호",
+        "bizPermitNo": "1048198557",
+        "shopAddr": "****13****로2가******",
+        "shopTelNo": "070*******7237",
+        "sellDate": "20250121",
+        "sellTime": "134718",
+        "totalSalesAmt": 1500,
+        "purpose": "고객용"
+    },
+    "HTML": {
+
+    },
+    "PDF": {
+
+    }
+}
