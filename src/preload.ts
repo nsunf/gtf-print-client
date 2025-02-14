@@ -7,4 +7,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     previewSTFMMediRefundReceipt: (param: STFMMediRefundReceiptParam) => ipcRenderer.invoke('previewSTFMMediRefundReceipt', param),
     previewSTFMMediPayReceipt: (param: STFMMediPayReceiptParam) => ipcRenderer.invoke('previewSTFMMediPayReceipt', param),
     previewReceipt: (param: ReceiptParam) => ipcRenderer.invoke('previewReceipt', param),
+    log: (level: LogLevel, ...args: any[]) => ipcRenderer.invoke('log', level, ...args),
 });

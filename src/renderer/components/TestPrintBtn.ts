@@ -1,5 +1,4 @@
 import printerListJSON from '../../config/printer-list.json';
-import dataSample from '../../config/data-sample.json';
 import sampleDataLoader from '../../common/sampleDataLoader';
 
 type PrinterList = typeof printerListJSON;

@@ -5,6 +5,7 @@ import axios from 'axios';
 import Logger from './main/utils/Logger';
 import previewReceiptHandler from './main/ipcHandlers/previewReceiptHandler';
 import printHandler from './main/ipcHandlers/printHandler';
+import printLog from './main/ipcHandlers/logHandler';
 
 let mainWindow: BrowserWindow;
 
@@ -56,3 +57,4 @@ app.on('activate', () => {
 
 ipcMain.handle('previewReceipt', previewReceiptHandler);
 ipcMain.handle('print', printHandler);
+ipcMain.handle('log', printLog);

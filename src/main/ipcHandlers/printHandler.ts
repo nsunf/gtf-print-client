@@ -22,7 +22,12 @@ export default function printHandler(e: IpcMainInvokeEvent, param: ReceiptParam)
 
         // 영수증 미리보기
         // 실제로 화면에 보여지지 않고 데이터 로드 후 바로 출력됨.
-        const preview = new BrowserWindow({ show: false });
+        const preview = new BrowserWindow({
+            show: true,
+            webPreferences: {
+                webSecurity: false,
+            }
+        });
 
         // 영수증 데이터 로드 시 프린트 출력
         preview.webContents.on('did-finish-load', () => {
