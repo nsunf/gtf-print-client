@@ -1,4 +1,5 @@
 {
+    "defaultPort": 49150,
     "port": 49150,
     "startOnBoot": false
 }
