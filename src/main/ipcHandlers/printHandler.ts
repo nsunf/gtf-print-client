@@ -22,16 +22,18 @@ export default function printHandler(e: IpcMainInvokeEvent, param: ReceiptParam)
 
         // printer-list.json 파일에 정의되어있는 프린터 존재하는지 확인.
         // TODO: 프린터가 존재하지 않아도 ReceiptParam으로 전달받은 프린터 이름으로 진행하도록 수정
+        Logger.info('요청 프린터 : ' + param.printerName);
         Logger.info('프린트 조회');
-        const printerList = await preview.webContents.getPrintersAsync();
+        let printerList = await preview.webContents.getPrintersAsync();
+        printerList = printerList.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0));
         printerList.forEach(p => {
             Logger.info('- ' + p.name);
         });
 
         const printer = printerList.findLast(p => p.name === param.printerName)
             ?? printerList.findLast(p => {
-                const p1 = p.name.replaceAll(/[\s|\-|_]/g, '');
-                const p2 = param.printerName.replaceAll(/[\s|\-|_]/g, '');
+                const p1 = p.name.replaceAll(/[\s|\-|\_]/g, '').toUpperCase();
+                const p2 = param.printerName.replaceAll(/[\s|\-|\_]/g, '').toUpperCase();
 
                 return p1 === p2;
             });
@@ -47,8 +49,8 @@ export default function printHandler(e: IpcMainInvokeEvent, param: ReceiptParam)
 
         const printerSetting: PrinterSetting = printerListJSON.find(p => p.name === param.printerName)
             ?? printerListJSON.find(p => {
-                const p1 = p.name.replaceAll(/[\s|\-|_]/g, '');
-                const p2 = param.printerName.replaceAll(/[\s|\-|_]/g, '');
+                const p1 = p.name.replaceAll(/[\s|\-|\_]/g, '').toUpperCase();
+                const p2 = param.printerName.replaceAll(/[\s|\-|\_]/g, '').toUpperCase();
 
                 return p1 === p2;
             });
