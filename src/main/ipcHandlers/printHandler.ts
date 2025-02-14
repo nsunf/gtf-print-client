@@ -30,8 +30,8 @@ export default function printHandler(e: IpcMainInvokeEvent, param: ReceiptParam)
 
         const printer = printerList.findLast(p => p.name === param.printerName)
             ?? printerList.findLast(p => {
-                const p1 = p.name.replaceAll(/[\s|-|_]/, '');
-                const p2 = param.printerName.replaceAll(/[\s|-|_]/, '');
+                const p1 = p.name.replaceAll(/[\s|\-|_]/g, '');
+                const p2 = param.printerName.replaceAll(/[\s|\-|_]/g, '');
 
                 return p1 === p2;
             });
@@ -47,8 +47,8 @@ export default function printHandler(e: IpcMainInvokeEvent, param: ReceiptParam)
 
         const printerSetting: PrinterSetting = printerListJSON.find(p => p.name === param.printerName)
             ?? printerListJSON.find(p => {
-                const p1 = p.name.replaceAll(/[\s|-|_]/, '');
-                const p2 = param.printerName.replaceAll(/[\s|-|_]/, '');
+                const p1 = p.name.replaceAll(/[\s|\-|_]/g, '');
+                const p2 = param.printerName.replaceAll(/[\s|\-|_]/g, '');
 
                 return p1 === p2;
             });

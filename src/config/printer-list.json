@@ -2,19 +2,19 @@
     {
         "id": 0,
         "name": "BIXOLON SRP-350III",
-        "paperWidth": 70000,
+        "paperWidth": 72000,
         "maxPaperHeight": 1000000
     },
     {
         "id": 1,
         "name": "BIXOLON SRP-350PLUSII",
-        "paperWidth": 70000,
+        "paperWidth": 72000,
         "maxPaperHeight": 1000000
     },
     {
         "id": 2,
         "name": "SEWOO SLK-TS200",
-        "paperWidth": 76000,
+        "paperWidth": 72000,
         "maxPaperHeight": 1000000
     }
 ]

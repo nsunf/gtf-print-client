@@ -3,16 +3,40 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="%BASE_URL%/lib/bootstrap-5.3.3-dist/css/bootstrap.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
-  <script src="%BASE_URL%/lib/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
   <script src="%BASE_URL%/lib/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
   <script src="%BASE_URL%/lib/bwip-js-4.5.1/bwip-js.js"></script>
   <script>window.bwipjs = window.module && window.module.exports ? window.module.exports : bwipjs;</script>
   <script src="%BASE_URL%/lib/custom/common.js"></script>
-  <script src="https://unpkg.com/encoding-japanese@2.2.0/encoding.min.js"></script>
-  <title>STFM 물품 오프라인 전표</title>
+  <title>STFM 물품 오프라인 전표 - {{buySerialNo}}</title>
+  <style>
+    @font-face {
+      font-family: 'D2Coding';
+      src: url('%BASE_URL%/fonts/D2Coding-Ver1.3.2-20180524-all.ttc?#D2Coding') format('truetype-collection');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'D2Coding';
+      src: url('%BASE_URL%/fonts/D2Coding-Ver1.3.2-20180524-all.ttc?#D2Coding Bold') format('truetype-collection');
+      font-weight: bold;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'D2CodingLigature';
+      src: url('%BASE_URL%/fonts/D2Coding-Ver1.3.2-20180524-all.ttc?#D2Coding ligature') format('truetype-collection');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'D2CodingLigature';
+      src: url('%BASE_URL%/fonts/D2Coding-Ver1.3.2-20180524-all.ttc?#D2Coding ligature Bold') format('truetype-collection');
+      font-weight: bold;
+      font-style: normal;
+    }
+  </style>
   <style>
     html, body {
       margin: 0;
@@ -22,7 +46,7 @@
       max-width: 69mm;
       /* SEWOO SLK-TS200 */
       /* max-width: 72mm; */
-      font-family: 'D2Coding', serif;
+      font-family: 'D2Coding';
       font-size: 0.9rem;
       line-height: 0.9rem;
       letter-spacing: -0.05rem;

@@ -49,35 +49,42 @@ export default class TemplateService {
     transformHTMLURL(src: string): string {
         const root = parse(src);
 
+        // 전체에서 %BASE_URL%을 감지하도록 변경
+        if (app.isPackaged) {
+            root.innerHTML = root.innerHTML.replaceAll(/%BASE_URL%/g, path.join('file://', __dirname, '../renderer', MAIN_WINDOW_VITE_NAME).replaceAll('\\', '/'))
+        } else {
+            root.innerHTML = root.innerHTML.replaceAll(/%BASE_URL%/g, MAIN_WINDOW_VITE_DEV_SERVER_URL)
+        }
+
         // script 태그 src 변환
-        root.querySelectorAll('script[src], img[src]').forEach((el) => {
-            const ogPath = el.getAttribute('src');
+        // root.querySelectorAll('script[src], img[src]').forEach((el) => {
+        //     const ogPath = el.getAttribute('src');
 
-            if (!ogPath || !ogPath.startsWith('%BASE_URL%')) return;
+        //     if (!ogPath || !ogPath.startsWith('%BASE_URL%')) return;
 
-            const targetPath = ogPath.substring(11);
+        //     const targetPath = ogPath.substring(11);
 
-            if (app.isPackaged) {
-                el.setAttribute('src', path.join('file://', __dirname, '../renderer', MAIN_WINDOW_VITE_NAME, targetPath).replaceAll('\\', '/'));
-            } else {
-                el.setAttribute('src',MAIN_WINDOW_VITE_DEV_SERVER_URL + '/' + targetPath);
-            }
-        });
+        //     if (app.isPackaged) {
+        //         el.setAttribute('src', path.join('file://', __dirname, '../renderer', MAIN_WINDOW_VITE_NAME, targetPath).replaceAll('\\', '/'));
+        //     } else {
+        //         el.setAttribute('src',MAIN_WINDOW_VITE_DEV_SERVER_URL + '/' + targetPath);
+        //     }
+        // });
 
         // link 태그 href 변환
-        root.querySelectorAll('link[href]').forEach((el) => {
-            const ogPath = el.getAttribute('href');
+        // root.querySelectorAll('link[href]').forEach((el) => {
+        //     const ogPath = el.getAttribute('href');
 
-            if (!ogPath || !ogPath.startsWith('%BASE_URL%')) return;
+        //     if (!ogPath || !ogPath.startsWith('%BASE_URL%')) return;
 
-            const targetPath = ogPath.substring(11);
+        //     const targetPath = ogPath.substring(11);
 
-            if (app.isPackaged) {
-                el.setAttribute('href', path.join('file://', __dirname, '../renderer', MAIN_WINDOW_VITE_NAME, targetPath).replaceAll('\\', '/'));
-            } else {
-                el.setAttribute('href',MAIN_WINDOW_VITE_DEV_SERVER_URL + '/' + targetPath);
-            }
-        });
+        //     if (app.isPackaged) {
+        //         el.setAttribute('href', path.join('file://', __dirname, '../renderer', MAIN_WINDOW_VITE_NAME, targetPath).replaceAll('\\', '/'));
+        //     } else {
+        //         el.setAttribute('href',MAIN_WINDOW_VITE_DEV_SERVER_URL + '/' + targetPath);
+        //     }
+        // });
 
         return root.toString();
     }
