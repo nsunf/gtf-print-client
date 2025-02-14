@@ -58,7 +58,7 @@ export default class TemplateService {
             const targetPath = ogPath.substring(11);
 
             if (app.isPackaged) {
-                el.setAttribute('src', path.join(__dirname, '../renderer', MAIN_WINDOW_VITE_NAME, targetPath).replaceAll('\\', '/'));
+                el.setAttribute('src', path.join('file://', __dirname, '../renderer', MAIN_WINDOW_VITE_NAME, targetPath).replaceAll('\\', '/'));
             } else {
                 el.setAttribute('src',MAIN_WINDOW_VITE_DEV_SERVER_URL + '/' + targetPath);
             }
@@ -73,7 +73,7 @@ export default class TemplateService {
             const targetPath = ogPath.substring(11);
 
             if (app.isPackaged) {
-                el.setAttribute('href', path.join(__dirname, '../renderer', MAIN_WINDOW_VITE_NAME, targetPath).replaceAll('\\', '/'));
+                el.setAttribute('href', path.join('file://', __dirname, '../renderer', MAIN_WINDOW_VITE_NAME, targetPath).replaceAll('\\', '/'));
             } else {
                 el.setAttribute('href',MAIN_WINDOW_VITE_DEV_SERVER_URL + '/' + targetPath);
             }
