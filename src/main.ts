@@ -6,6 +6,8 @@ import Logger from './main/utils/Logger';
 import previewReceiptHandler from './main/ipcHandlers/previewReceiptHandler';
 import printHandler from './main/ipcHandlers/printHandler';
 import printLog from './main/ipcHandlers/logHandler';
+import WebSocketService from './main/service/WebSocketService';
+import webSocketServerCheckHandler from './main/ipcHandlers/webSocketServerCheckHandler';
 
 let mainWindow: BrowserWindow;
 
@@ -41,6 +43,18 @@ app.on('ready', () => {
   .then(res => {
     dialog.showMessageBox(mainWindow, { message: res.data.substring(0, 20) })
   })
+
+  const webSocketService = WebSocketService.getInstance();
+
+  setInterval(() => {
+    if (webSocketService.isEnabled) {
+//
+    } else {
+      // Logger.info('[WebSocketServer Down]');
+
+      // webSocketService.restartServer();
+    }
+  }, 1000);
 });
 
 app.on('window-all-closed', () => {
@@ -57,4 +71,5 @@ app.on('activate', () => {
 
 ipcMain.handle('previewReceipt', previewReceiptHandler);
 ipcMain.handle('print', printHandler);
+ipcMain.handle('checkWebSocketServer', webSocketServerCheckHandler);
 ipcMain.handle('log', printLog);

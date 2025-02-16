@@ -1,33 +1,34 @@
-import { WebSocketServer } from 'ws';
+import { WebSocket, WebSocketServer } from 'ws';
 import { parse } from 'url';
 import setting from '../../config/setting.json';
 import Logger from '../utils/Logger';
 
-type Setting = typeof setting;
+// type Setting = typeof setting;
 
-export default class WebSockerService {
-    private static instance: WebSockerService;
+export default class WebSocketService {
+    private static instance: WebSocketService;
 
     private server: WebSocketServer;
     private port: number;
     private _isEnabled: boolean;
 
-    private messageEvent: (data: any) => void;
+    private messageEvent: (ws: WebSocket, data: any) => void;
 
     private constructor() {
         this._isEnabled = false;
         this.setWebSocketServer();
     }
 
-    public static getInstance(): WebSockerService  {
+    public static getInstance(): WebSocketService  {
         if (this.instance === null || this.instance === undefined) {
-            this.instance = new WebSockerService();
+            this.instance = new WebSocketService();
         }
 
         return this.instance;
     }
 
     private setWebSocketServer() {
+        Logger.info('WebSocket Port : ' + setting.port);
         this.port = setting.port;
 
         this.server = new WebSocketServer({
@@ -42,17 +43,17 @@ export default class WebSockerService {
 
         this.server.on('connection', (ws, request) => {
             Logger.info('[WebSocketServer Connected]');
+            this._isEnabled = true;
             const url = parse(request.url);
 
             ws.on('open', () => {
                 Logger.info('[WebSocketServer Opened]');
-                this._isEnabled = true;
             });
 
             ws.on('message', (data) => {
                 Logger.info('[WebSocket Message Received : ' + data.toString());
                 try {
-                    this.messageEvent(data);
+                    this.messageEvent(ws, data);
                     ws.send(200);
                 } catch (error) {
                     Logger.error(error);
@@ -63,6 +64,7 @@ export default class WebSockerService {
             ws.on('closed', () => {
                 Logger.info('[WebSocketServer Closed]');
                 this._isEnabled = false;
+                this.restartServer();
             });
 
             ws.on('error', (error) => {
@@ -74,7 +76,7 @@ export default class WebSockerService {
         });
     }
 
-    public onMessage(callback: (data: any) => void) {
+    public onMessage(callback: (ws: WebSocket, data: any) => void) {
         this.messageEvent = callback;
     }
 

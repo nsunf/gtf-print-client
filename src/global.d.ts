@@ -8,18 +8,19 @@ export declare global {
       previewSTFMMediRefundReceipt: (param: STFMMediRefundReceiptParam) => Promise<boolean>,
       previewSTFMMediPayReceipt: (param: STFMMediPayReceiptParam) => Promise<boolean>,
       previewReceipt: (param: ReceiptParam) => Promise<boolean>,
+      checkWebSocketServer: () => boolean,
       log: (level: LogLevel, ...args: any[]) => void,
     };
-  }
-
-  interface PrintOptions {
-    paperWidth?: number;
-    maxPaperHeight?: number;
   }
 
   type LogLevel = 'info'|'debug'|'warn'|'error'|'verbose'|'silly';
 
   type RequestType = 'STFM_ITEM'|'STFM_ITEM_OFFLINE'|'STFM_MEDI_REFUND'|'STFM_MEDI_PAY'|'HTML'|'PDF';
+
+  interface PrintOptions {
+    paperWidth?: number;
+    maxPaperHeight?: number;
+  }
 
   interface GoodsItem {
     goodsName?: string;
